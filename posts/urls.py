@@ -4,5 +4,5 @@ from posts import views
 
 urlpatterns = [
     path('', views.main_view),
-    path('comment/<int:movie_id>', views.insert_comment),
+    path('movies/<int:movie_id>/comments', views.comments),
 ]

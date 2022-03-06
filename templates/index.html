@@ -22,6 +22,9 @@ body {font-family: "Open Sans"}
 
 
 
+
+
+
 </style>
 <body class="w3-light-grey">
 <!-- w3-content defines a container for fixed size centered content, 
@@ -49,28 +52,21 @@ and is wrapped around the whole page content, except for the footer in this exam
                 <div class="w3-justify">
                     <img src=" {{ movie.image.url }} " style="width:70%" class="w3-padding-16">
                     <p>{{ movie.description }}</p>
-                    <input onclick="show('movie_{{movie.id}}')" class="w3-button w3-black" type="submit" name="comments" value="comments"/>
-
-                    <div id="movie_{{movie.id}}" style="display:none">
-                        <p>Comments:</p>
-                        <ul class="list-group">
-                            {% for cm in movie.related_comments %}
-                            <li class="list-group-item">date:{{cm.date}}<br>comment:{{cm.text}}<br>
-                                <audio controls>
-                                    <source src="{{cm.voice.url}}">
-                                </audio>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                    <form action="/movies/{{movie.id}}/comments" method="get" enctype="multipart/form-data">
+                        <input class="w3-button w3-black" type="submit" name="comments" value="comments"/>
+                        {% csrf_token %}
+                        {{ get_comment_form }}
+                    </form>
 
 
                 </div>
-
-                <form action="/comment/{{movie.id}}" method="post" enctype="multipart/form-data">
+                <br><br>
+                <form action="/movies/{{movie.id}}/comments" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="submit">
+                    {{ insert_comment_form }}
+                    <br>
+
+                    <input class="w3-button w3-blue" type="submit" value="submit">
                 </form>
             </div>
 
@@ -100,6 +96,9 @@ and is wrapped around the whole page content, except for the footer in this exam
                 function show(element_id) {
                     document.getElementById(element_id).style.cssText = 'display: block;'
                 }
+
+
+
 
 
 

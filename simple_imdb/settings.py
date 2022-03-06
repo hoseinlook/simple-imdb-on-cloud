@@ -73,23 +73,23 @@ WSGI_APPLICATION = 'simple_imdb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'simple_imdb',
-    'USER': 'root',
-    'PASSWORD': 'root',
-    'HOST': 'hw1-db',
-    'PORT': '3306',
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# DATABASES = {
+#   'default': {
+#     'ENGINE': 'django.db.backends.mysql',
+#     'NAME': 'simple_imdb',
+#     'USER': 'root',
+#     'PASSWORD': 'root',
+#     'HOST': 'hw1-db',
+#     'PORT': '3306',
+#   }
+# }
 
 
 # Password validation
@@ -133,3 +133,4 @@ MEDIA_ROOT = BASE_DIR.joinpath('data').joinpath('media')
 
 IMB_SPEECH_TOKEN = os.getenv("IMB_SPEECH_TOKEN")
 IMB_NLU_TOKEN = os.getenv("IMB_NLU_TOKEN")
+IMB_TRANSLATION_TOKEN = os.getenv("IMB_TRANSLATION_TOKEN")

@@ -1,0 +1,11 @@
+{% block content %}
+<ul class="list-group">
+    {% for cm in comments %}
+    <li class="list-group-item">date:{{cm.date}}<br>comment:{{cm.text}}<br>
+        <audio controls>
+            <source src="{{cm.voice.url}}">
+        </audio>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<title>SimpleImdb</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+body {font-family: "Open Sans"}
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<body class="w3-light-grey">
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1600px">
+
+    <!-- Header -->
+    <header class="w3-container w3-center w3-padding-48 w3-white">
+        <h1 class="w3-xxxlarge"><b>hoseinlook</b></h1>
+    </header>
+    <!-- Grid -->
+    {% block content %}
+
+    <div class="w3-row w3-padding w3-border">
+
+        <!-- Blog entries -->
+        <div class="w3-col l8 s12">
+            {% for movie in movies %}
+            <div class="w3-container w3-white w3-margin w3-padding-large">
+                <div class="w3-center">
+                    <h3>{{ movie.title }}</h3>
+                    <h5></h5>, <span class="w3-opacity">{{movie.date}}</span></h5>
+                </div>
+
+                <div class="w3-justify">
+                    <img src=" {{ movie.image.url }} " style="width:70%" class="w3-padding-16">
+                    <p>{{ movie.description }}</p>
+                    <input onclick="show('movie_{{movie.id}}')" class="w3-button w3-black" type="submit" name="comments" value="comments"/>
+
+                    <div id="movie_{{movie.id}}" style="display:none">
+                        <p>Comments:</p>
+                        <ul class="list-group">
+                            {% for cm in movie.related_comments %}
+                            <li class="list-group-item">date:{{cm.date}}<br>comment:{{cm.text}}<br>
+                                <audio controls>
+                                    <source src="{{cm.voice.url}}">
+                                </audio>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+
+                </div>
+
+                <form action="/comment/{{movie.id}}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="submit">
+                </form>
+            </div>
+
+
+            {% endfor %}
+            <!-- Blog entry -->
+
+
+            <hr>
+
+
+            <!-- END BLOG ENTRIES -->
+        </div>
+        <!-- Footer -->
+        <footer class="w3-container w3-dark-grey" style="padding:32px">
+            <a href="#" class="w3-button w3-black w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Hoseinlook</a></p>
+        </footer>
+
+        <script>
+
+                function likeFunction(x) {
+                  x.style.fontWeight = "bold";
+                  x.innerHTML = "✓ Liked";
+                }
+
+                function show(element_id) {
+                    document.getElementById(element_id).style.cssText = 'display: block;'
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+
+
+    </div>
+    {% endblock %}
+</body>
+</html>

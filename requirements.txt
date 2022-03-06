@@ -1,0 +1,7 @@
+Django
+mysqlclient
+Jinja2
+Pillow
+ibm-watson>=5.3.1
+python-dotenv
+django-jinja

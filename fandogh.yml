@@ -1,0 +1,18 @@
+kind: ExternalService
+name: simple-imdb
+spec:
+  image_pull_policy: Always
+  port: 80
+  volume_browser_enabled: false
+  source:
+    context: .
+    media_path: ./data/media
+    project_type: django
+    python_version: '3.7'
+    static_path: ./data/static
+    wsgi: simple_imdb.wsgi
+  volume_mounts:
+  - mount_path: /usr/src/app/data
+    volume_name: hoseinlook
+  resources:
+    memory: 300Mi
